@@ -1,0 +1,61 @@
+# Data Dictionary — Refugee Integration Analysis
+
+## Master Table Schema
+`refugee_master_consolidated.parquet` & `.csv`
+
+### Core Fields (from UNHCR)
+| Field | Type | Description | Source |
+|-------|------|---|---|
+| `iso_a3` | str | ISO 3166-1 alpha-3 country code | UNHCR normalized |
+| `Country` | str | Country name | UNHCR |
+| `Year` | int | Calendar year (2000-2023) | UNHCR |
+| `Refugees` | int | Total refugees | UNHCR |
+| `Asylum_seekers` | int | Asylum seeker count | UNHCR |
+| `IDPs` | int | Internally displaced persons | UNHCR |
+| `Returnees_refugees` | int | Returned refugees | UNHCR |
+| `Stateless_persons` | int | Stateless population | UNHCR |
+
+### Integration Indicators (Synthetic)
+| Field | Type | Range | Description |
+|-------|------|-------|---|
+| `employment_rate` | float | 0-100 | % refugees employed (synthetic) |
+| `housing_access` | float | 0-100 | % with adequate housing (synthetic) |
+| `education_enrollment` | float | 0-100 | % enrollment in education (synthetic) |
+| `income_stability` | float | 0-100 | Income stability score (synthetic) |
+| `legal_rights_score` | float | 0-100 | Legal rights protection (synthetic) |
+| `social_cohesion` | float | 0-100 | Social integration index (synthetic) |
+
+### Composite Index
+| Field | Type | Formula |
+|-------|------|---------|
+| `integration_index` | float | 0.20×employment + 0.15×housing + 0.20×education + 0.15×income + 0.20×rights + 0.10×cohesion |
+
+### Geography (from Natural Earth)
+| Field | Type | Description |
+|-------|------|---|
+| `name` | str | Country name (full) |
+| `geometry` | geom | GeoJSON point (centroid) |
+| `iso_n3` | str | ISO numeric code |
+| `pop_est` | int | Estimated population |
+
+### Data Quality Flags
+| Field | Type | Description |
+|-------|------|---|
+| `data_source` | str | "UNHCR 1951-2023" or "Recent 2019-2024" |
+| `quality_flag` | str | "clean" or "imputed" or "missing" |
+| `updated_date` | datetime | Last update timestamp |
+
+## Nulls & Coverage
+- **UNHCR fields:** <2% null
+- **Synthetic fields:** 0% null (generated)
+- **Geographic fields:** ~5% null (countries without match)
+- **Temporal coverage:** 2000-2023 (24 years complete)
+
+## Record Count
+- **Total:** ~1,200 (50 countries × 24 years)
+- **With complete data:** ~1,140 (95%)
+
+## Notes
+- Synthetic data uses seed 42 for reproducibility
+- Fuzzy matching resolves country name variations (fuzzywuzzy)
+- Integration metrics are illustrative (entry-level portfolio, not research-grade)

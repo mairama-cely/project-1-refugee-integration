@@ -1,0 +1,30 @@
+# Changelog — Refugee Integration Analysis
+
+## [Unreleased]
+
+### Phase 2: Data Fetching & Processing
+**Status:** In Progress
+
+#### Added
+- `requirements.txt` — Python dependencies
+- `README.md` — Project overview & setup
+- `METADATA.md` — Data dictionary & schema
+- `CHANGELOG.md` — Version history
+- `scripts/fetch_kaggle_data.py` — Kaggle download automation (pending)
+- `scripts/generate_synthetic_integration.py` — Synthetic data generation (pending)
+- `scripts/merge_and_validate.py` — Data merge & QA (pending)
+- `notebooks/00_Data_Fetching.ipynb` — Jupyter workflow (pending)
+
+#### Planned
+- `01_EDA.ipynb` — Exploratory data analysis
+- `02_Data_Cleaning.ipynb` — Data quality & imputation
+- `03_Integration_Index.ipynb` — Composite index calculation
+- SQL pipeline (database schema + ETL)
+- Dashboard (Tableau/Power BI)
+
+## [0.1.0] — 2026-08-30
+
+### Initial Setup
+- Project folder structure created
+- Directories: data/, scripts/, notebooks/, database/, docs/, output/
+- Git repo initialized (pending)

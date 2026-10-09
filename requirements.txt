@@ -1,0 +1,12 @@
+pandas
+kagglehub
+geopandas
+faker
+numpy
+requests
+pyarrow
+python-Levenshtein
+fuzzywuzzy
+jupyter
+matplotlib
+seaborn
